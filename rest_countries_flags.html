@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Country Flags</title>
+    <style>
+      #flags-container {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      img {
+        width: 50px;
+        height: 30px;
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="flags-container"></div>
+    <script>
+      fetch('https://restcountries.com/v2/all')
+        .then(response => response.json())
+        .then(data => {
+          const container = document.querySelector('#flags-container');
+
+          data.forEach(country => {
+            const flagImg = document.createElement('img');
+            flagImg.src = country.flag;
+            container.appendChild(flagImg);
+          });
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    </script>
+  </body>
+</html>
